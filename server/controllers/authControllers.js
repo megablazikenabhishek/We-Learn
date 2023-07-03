@@ -68,7 +68,7 @@ exports.LoginController = async (req, res) => {
     if (!email || !password) {
       return res.status(400).json({ msg: "Please fill all the fields" });
     }
-    const user = await UserModel.find({ email });
+    const user = await UserModel.findOne({ email });
     if (!user) {
       return res.status(400).json({
         success: false,
