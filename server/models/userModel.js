@@ -20,7 +20,7 @@ const userSchema = new Schema(
       type: String,
       enum: ["teacher", "student"],
       lowercase: true,
-      default: "teacher",
+      default: "student",
     },
     isVerified: {
       type: Boolean,
