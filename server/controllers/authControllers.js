@@ -51,6 +51,7 @@ exports.VerifyEmail = async (req, res) => {
   try {
     const { id } = req.params;
     await UserModel.updateOne({ _id: id }, { $set: { isVerified: true } });
+    res.status(200).json({ msg: "Email Verified" });
   } catch (error) {
     console.log(error);
     res.status(500).json({
