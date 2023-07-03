@@ -3,9 +3,7 @@ const nodemailer = require("nodemailer");
 exports.sendMailforVerification = async (name, email, id) => {
   try {
     const transporter = nodemailer.createTransport({
-      service: "Gmail",
-      port: 465,
-      secure: true,
+      service: "gmail",
       auth: {
         user: process.env.SENDER_MAIL,
         pass: process.env.SENDER_PASSWORD,
