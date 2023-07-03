@@ -88,7 +88,6 @@ exports.LoginController = async (req, res) => {
         msg: "Wrong Password. Please enter correct Password",
       });
     }
-
     const payload = { _id: user._id };
     const token = jwt.sign(payload, process.env.SECRET_KEY);
     res.status(200).json({
