@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const teacherModel = require("../models/teacherModel");
 
 exports.checkForAuth = (req, res, next) => {
   const token = req.headers.authorization;
@@ -12,5 +13,18 @@ exports.checkForAuth = (req, res, next) => {
     }
   } else {
     return res.status(401).json({ message: "Authorization token missing" });
+  }
+};
+
+exports.checkforTeacher = async (req, res, next) => {
+  try {
+    const user = await teacherModel.findById(req.user._id);
+    if (user) {
+      next();
+    }
+    return res.status(400).send({ msg: "User is not a teacher " });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: "Internal Server Error" });
   }
 };

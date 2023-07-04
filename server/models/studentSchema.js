@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
-const userSchema = new Schema(
+const studentSchema = new Schema(
   {
     name: {
       type: String,
@@ -10,17 +10,10 @@ const userSchema = new Schema(
     email: {
       type: String,
       required: true,
-      unique: true,
     },
     password: {
       type: String,
       required: true,
-    },
-    role: {
-      type: String,
-      enum: ["teacher", "student"],
-      lowercase: true,
-      default: "student",
     },
     isVerified: {
       type: Boolean,
@@ -30,7 +23,7 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
-userSchema.pre("save", async function (next) {
+studentSchema.pre("save", async function (next) {
   try {
     if (this.isModified("password")) {
       this.password = await bcrypt.hash(this.password, 10);
@@ -41,10 +34,6 @@ userSchema.pre("save", async function (next) {
   }
 });
 
-userSchema.methods.comparePassword = async function (password) {
-  return await bcrypt.compare(password, this.password);
-};
+const studentModel = model("student", studentSchema);
 
-const UserModel = model("user", userSchema);
-
-module.exports = UserModel;
+module.exports = studentModel;
