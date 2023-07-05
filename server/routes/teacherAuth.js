@@ -3,7 +3,7 @@ const {
   registerController,
   VerifyEmail,
   LoginController,
-} = require("../controllers/authControllers");
+} = require("../controllers/teachAuthController");
 
 const router = express.Router();
 
