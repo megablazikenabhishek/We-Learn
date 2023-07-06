@@ -164,8 +164,8 @@ export default function NavBar() {
   );
 
   return (
-    <ThemeProvider  theme={darkTheme}>
-      <CssBaseline/>
+    // <ThemeProvider  theme={darkTheme}>
+    //   <CssBaseline/>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
@@ -240,6 +240,6 @@ export default function NavBar() {
         {renderMobileMenu}
         {renderMenu}
       </Box>
-    </ThemeProvider>
+    // </ThemeProvider>
   );
 }
