@@ -4,6 +4,7 @@ const { checkForAuth, checkforTeacher } = require("./middleware/authMiddle");
 require("dotenv").config();
 const app = express();
 //middlewares
+app.use(require("cors")())
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 

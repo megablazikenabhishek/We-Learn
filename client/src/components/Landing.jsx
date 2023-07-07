@@ -14,11 +14,13 @@ import Testimonials from "../components/Testimonial/Testimonials";
 import Newsletter from "../components/Newsletter/Newsletter";
 import Footer from "../components/Footer/Footer";
 import LandNav from "./LandNav";
+import NavBar from "./Navbar";
 const Home = () => {
   return (
     <Fragment>
       {/* <Header /> */}
-      <LandNav />
+      {/* <LandNav /> */}
+      <NavBar />
       <HeroSection />
       <CompanySection />
       <AboutUs />
