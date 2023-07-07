@@ -186,7 +186,7 @@ export default function NavBar() {
             >
               MUI
             </Typography>
-            <Search className="search-box" style={{width:"450px", marginLeft:"320px"}}>
+            <Search className="search-box">
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>

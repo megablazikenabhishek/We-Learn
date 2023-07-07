@@ -1,15 +1,18 @@
 import { useState } from 'react'
 import './App.css'
 import Button from "@mui/material/Button";
-import NavBar from "./components/Navbar"
+import HomePage from './pages/HomePage';
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  
   return (
     <>
-      {/* <Button variant="contained">Hello World</Button> */}
-      <NavBar/>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/home' element={<HomePage/>}/>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
