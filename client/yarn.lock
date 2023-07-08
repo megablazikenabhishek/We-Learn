@@ -1087,7 +1087,7 @@
 
 "@emotion/react@^11.11.1":
   version "11.11.1"
-  resolved "https://registry.npmjs.org/@emotion/react/-/react-11.11.1.tgz"
+  resolved "https://registry.yarnpkg.com/@emotion/react/-/react-11.11.1.tgz#b2c36afac95b184f73b08da8c214fdf861fa4157"
   integrity sha512-5mlW1DquU5HaxjLkfkGN1GA/fvVGdyHURRiX/0FHl2cfIfRxSOfmxEH5YS43edp0OldZrZ+dkBKbngxcNCdZvA==
   dependencies:
     "@babel/runtime" "^7.18.3"
@@ -1117,7 +1117,7 @@
 
 "@emotion/styled@^11.11.0":
   version "11.11.0"
-  resolved "https://registry.npmjs.org/@emotion/styled/-/styled-11.11.0.tgz"
+  resolved "https://registry.yarnpkg.com/@emotion/styled/-/styled-11.11.0.tgz#26b75e1b5a1b7a629d7c0a8b708fbf5a9cdce346"
   integrity sha512-hM5Nnvu9P3midq5aaXj4I+lnSfNi7Pmd4EWk1fOZ3pxookaQTNew6bp4JaCBYM4HVFZF9g7UjJmsUmC2JlxOng==
   dependencies:
     "@babel/runtime" "^7.18.3"
@@ -1370,6 +1370,22 @@
   integrity sha512-zoVtkb9jYVUGfI7CobOdDBEAlpg3XESiO6cWqSDGwEma69+CBDIAwGpnO5truvQDJHBGSAfzFj3nObwxjkyA7Q==
   dependencies:
     "@babel/runtime" "^7.22.5"
+
+"@mui/joy@^5.0.0-alpha.86":
+  version "5.0.0-alpha.86"
+  resolved "https://registry.yarnpkg.com/@mui/joy/-/joy-5.0.0-alpha.86.tgz#0b3a34a56ac25f2abf55bf052bf94e71af0a441a"
+  integrity sha512-Ljhzb4rwjzUyVZqv4IDPTLWvpOjYs/+XJuz9b7j+Zf6i09xYMvXIe5hgI2jHHdf26by+4EwtoU85GrKpN8fp8w==
+  dependencies:
+    "@babel/runtime" "^7.22.5"
+    "@mui/base" "5.0.0-beta.6"
+    "@mui/core-downloads-tracker" "^5.13.7"
+    "@mui/system" "^5.13.7"
+    "@mui/types" "^7.2.4"
+    "@mui/utils" "^5.13.7"
+    clsx "^1.2.1"
+    csstype "^3.1.2"
+    prop-types "^15.8.1"
+    react-is "^18.2.0"
 
 "@mui/material@^5.13.7":
   version "5.13.7"

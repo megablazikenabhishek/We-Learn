@@ -26,11 +26,41 @@ exports.Create_Course = async(req, res, next)=>{
   }
 }
 
+exports.addQuestions = async(req, res, next)=>{
+  try {
+    // console.log(req.body);
+    const {id} = req.params;
+
+    const data = await Course.findByIdAndUpdate(id, {
+      questions: req.body.questions,
+    });
+
+    // console.log(data)
+
+    res.status(201).json({sucess: true, data});
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ msg: "Internal Server Error" });
+  }
+}
+
 exports.getAllCourse = async(req, res, next)=>{
   try{
     const data = await Course.find({});
     res.status(200).json({success: true, data});
   }catch(error){
+    console.log(error);
+    return res.status(500).json({ msg: "Internal Server Error" });
+  }
+}
+
+exports.getCourse = async(req, res, next)=>{
+  try {
+    // console.log("hii")
+    const {id: courseId} = req.params;
+    const data = await Course.findById(courseId);
+    res.status(200).json({success: true, data: data})
+  } catch (error) {
     console.log(error);
     return res.status(500).json({ msg: "Internal Server Error" });
   }

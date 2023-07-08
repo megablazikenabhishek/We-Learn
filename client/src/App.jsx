@@ -9,27 +9,24 @@ import HomePage from "./pages/HomePage";
 import AddCourse from "./components/AddCourse/AddCourse";
 // import { Link } from "@mui/material";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import CourseView from "./components/CourseView/CourseView";
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
       <BrowserRouter>
-        {/* <Link to="/"></Link>
-        <Link to="/home"></Link>
-        <Link to="/login"></Link>
-        <Link to="/register"></Link>
-        <Link to="/add_course"></Link> */}
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<Landing />} />
           <Route path="/add_course" element={<AddCourse />} />
+          <Route path="/view_course/:id" element={<CourseView/>} />
         </Routes>
       </BrowserRouter>
     </>
-  );
+  )
 }
 
 export default App;

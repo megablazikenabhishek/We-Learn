@@ -10,5 +10,12 @@ router.post(
   require("../controllers/courseController").Create_Course
 );
 
+router.put(
+  "/create/addQuestions/:id",
+  require("../controllers/courseController").addQuestions
+);
+
 router.get("/getAll", require("../controllers/courseController").getAllCourse);
+
+router.get("/get/:id", require("../controllers/courseController").getCourse)
 module.exports = router;
