@@ -35,7 +35,7 @@ function Quiz(props) {
   return (
     <div>
       <p className="heading-txt">Quiz APP</p>
-      <div className="container">
+      <div className="container101">
         {showResult ? (
           <QuizResult
             score={score}
