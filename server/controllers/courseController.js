@@ -5,14 +5,20 @@ const {rimraf} = require("rimraf");
 exports.Create_Course = async(req, res, next)=>{
   try{
     // console.log(req.user);
-    const { name, details, questions } = req.body;
+    const { name, details, questions ,no_of_videos } = req.body;
     let course_data = {
       name, details, questions
     }      
-
+    console.log(req.files,no_of_videos)
+    let videos=[];
+    for(let i=0;i<no_of_videos;i++){
+      videos.push(req.files[`Video${i+1}`])
+    }
+    console.log(videos)
     course_data.thumbnail = await uploadSingleFile(req.files.thumbnail);
-    course_data.Video = await uploadMultipleFile(req.files.Video);
-    course_data.Instructor = req.user._id;
+    course_data.Video = await uploadMultipleFile(videos);
+    // course_data.Instructor = req.user._id;
+    course_data.Instructor = "64a9b8996e676a0561795d77";
 
     // console.log(course_data);
 

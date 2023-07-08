@@ -4,8 +4,8 @@ const uploader = require("express-fileupload");
 
 router.post(
   "/create",
-  checkForAuth,
-  checkforTeacher,
+  // checkForAuth,
+  // checkforTeacher,
   uploader({ useTempFiles: true, limits: { fileSize: 50 * 1024 * 1024 } }),
   require("../controllers/courseController").Create_Course
 );

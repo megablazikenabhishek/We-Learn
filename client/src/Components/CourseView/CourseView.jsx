@@ -1,6 +1,6 @@
 import { Paper } from "@mui/material";
 import { useState } from "react";
-import NavBar from "../Navbar";
+import NavBar from "../NavBar";
 import "./CourseView.css";
 import RenderVideo from "./RenderVideo"
 import { useParams } from "react-router-dom";
