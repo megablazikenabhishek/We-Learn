@@ -2,16 +2,21 @@ import React, { useState } from 'react'
 import './AddCourse.css'
 import axios from 'axios'
 import NavBar from '../NavBar'
+import { useNavigate } from 'react-router-dom'
 
 const AddCourse = () => {
 
   const [file,setFile]=useState(null)
-  const [video,setVideo]=useState([])
-  const [data, setData] = useState({ name: "", details: "" , Instructor :"",});
+  const [name,setname]=useState(null)
+  const [details,setdetails]=useState(null)
+  const [videos,setVideos]=useState([])
+  // const [data, setData] = useState({ name: "", details: "" , Instructor :"",});
 
-  const handleChange = ({ currentTarget: input }) => {
-		setData({ ...data, [input.name]: input.value });
-	};
+  // const handleChange = ({ currentTarget: input }) => {
+	// 	setData({ ...data, [input.name]: input.value });
+	// };
+
+  const navigate = useNavigate();
 
   const FileChange=(e)=>{
     console.log(e.target.value)
@@ -19,19 +24,21 @@ const AddCourse = () => {
   } 
 
   const VideoChange=(e)=>{
-    const newvideo=Array.from(e.target.files)
-    console.log(newvideo)
-    setVideo(newvideo)
+    setVideos(e.target.files)
   } 
 
   const handleSubmit=(e)=>{
     e.preventDefault();
 
     const formData =new FormData();
-    formData.append('photo',file)
-    formData.append('video',video)
+    formData.append('thumbnail',file)
+    for(let i=0;i<videos.length;i++){
+      formData.append(`Video${i+1}`,videos[i]);
+    }
 
-
+    formData.append('no_of_videos',videos.length);
+    formData.append('name',name);
+    formData.append('details',details);
 
     const config={
       headers:{
@@ -42,7 +49,10 @@ const AddCourse = () => {
     const url="http://localhost:8000/api/course/create";
 
     axios.post(url,formData,config).then((response)=>{
-      alert('Image Uploaded Successfully');
+      alert('Course Uploaded Successfully');
+      if(response.status==201){
+        navigate(`/add_question/${response.data.data._id}`)
+      }
     }).catch((err)=>{
       console.log('err',err)
     })
@@ -56,13 +66,13 @@ const AddCourse = () => {
         <div className="signup_form_container">
           <div className="right">
           <p>Add Course</p>
-            <form className="form_container" action="/" method="POST" >
+            <form className="form_container" onSubmit={handleSubmit}>
               <input
                 type="text"
                 placeholder="Course Name"
                 name="name"
-                onChange={handleChange}
-                value={data.name}
+                onChange={(e)=>{setname(e.target.value)}}
+                // value={data.name}
                 required
                 className="input"
               />
@@ -70,17 +80,8 @@ const AddCourse = () => {
                 type="text"
                 placeholder="Course Details"
                 name="details"
-                onChange={handleChange}
-                value={data.details}
-                required
-                className="input"
-              />
-              <input
-                type="text"
-                placeholder="Instructor Name"
-                name="Instructor"
-                onChange={handleChange}
-                value={data.Instructor}
+                onChange={(e)=>{setdetails(e.target.value)}}
+                // value={data.details}
                 required
                 className="input"
               />
@@ -89,7 +90,6 @@ const AddCourse = () => {
                 placeholder="Upload Thumbnail"
                 name="thumbnail"
                 onChange={FileChange}
-                // value={data.literates_male}
                 required
                 className="input"
               />
@@ -98,9 +98,8 @@ const AddCourse = () => {
                 multiple
                 accept='video/mp4'
                 placeholder="Video"
-                name="video"
+                name="Video"
                 onChange={VideoChange}
-                // value={data.literates_female}
                 required
                 className="input"
               />
