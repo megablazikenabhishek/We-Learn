@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "./App.css";
 import Button from "@mui/material/Button";
-import NavBar from "./components/Navbar";
+// import NavBar from "./components/Navbar";
+// import Profile from "./components/Profile";
 import Login from "./components/Login";
 import Landing from "./components/Landing";
 import Register from "./components/Register";
@@ -25,6 +26,7 @@ function App() {
           <Route path="/home" element={<HomePage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<Landing />} />
+          {/* <Route path="/profile" element={<Profile />} /> */}
           <Route path="/add_course" element={<AddCourse />} />
         </Routes>
       </BrowserRouter>
