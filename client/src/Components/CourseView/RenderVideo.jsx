@@ -5,26 +5,33 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import VideoPlayer from "./VideoPlayer"
+import VideoPlayer from "./VideoPlayer";
 import axios from "axios";
 import URI from "../../URI";
 import Quiz from "../Quiz/Quiz";
-
+import getAuthToken from "../../utils/getAuthToken";
 export default function RenderVideo(props) {
-  const {courseId} = props;
+  const { courseId } = props;
 
   const [courseData, setCourseData] = React.useState({});
 
   useEffect(() => {
-    
-    const fetchData = async()=>{
-      const {data} = await axios.get(`${URI}/api/course/get/${courseId}`);
+    const fetchData = async () => {
+      let config = {
+        headers: {
+          authorization: getAuthToken().token,
+        },
+      };
+      const { data } = await axios.get(
+        `${URI}/api/course/get/${courseId}`,
+        config
+      );
       // console.log(data)
-      setCourseData((prev)=>{
+      setCourseData((prev) => {
         return data.data;
-      })
-    }
-    
+      });
+    };
+
     fetchData();
   }, []);
 
@@ -60,7 +67,7 @@ export default function RenderVideo(props) {
             <Typography>Assignment</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Quiz QuizData = {courseData.questions}/>
+            <Quiz QuizData={courseData.questions} />
           </AccordionDetails>
         </Accordion>
       )}
