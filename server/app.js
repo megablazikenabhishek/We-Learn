@@ -6,6 +6,7 @@ const app = express();
 //middlewares
 app.use(require("cors")())
 app.use(express.json());
+app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 
 //routes
