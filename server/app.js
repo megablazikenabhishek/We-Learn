@@ -16,6 +16,7 @@ app.get("/test", checkForAuth, (req, res) => res.send("hi"));
 const port = process.env.PORT || 8000;
 (async () => {
   try {
+    console.log(process.env.MONGO_URI);
     await connectDB();
     app.listen(port, () => {
       console.log(`Server running at ${port}..`);
