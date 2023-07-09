@@ -41,7 +41,7 @@ export default function CourseCard(props) {
           sx = {{display: "flex", justifyContent: "centre", alignItems: "centre"}}
           onClick={()=>{navigate(`/view_course/${course._id}`)}}
         >
-          Enroll
+          View Course
         </Button>
       </CardActions>
     </Card>
