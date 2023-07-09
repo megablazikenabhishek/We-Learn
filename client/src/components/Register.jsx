@@ -3,7 +3,8 @@ import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import MultipleSelectChip from "./Multiselect";
-
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
 import React, { useState } from "react";
 import {
   MDBContainer,
@@ -29,6 +30,7 @@ function App() {
   const [justifyActive, setJustifyActive] = useState("tab1");
   const [name, setname] = useState("");
   const [email, setemail] = useState("");
+  const [flag, setFlag] = useState(false);
   const [password, setpassword] = useState("");
   const [qualification, setqualification] = useState("");
   const [proficiency, setproficiency] = useState([]);
@@ -45,11 +47,17 @@ function App() {
     console.log(name, email, password);
     const postData = async () => {
       try {
-        await axios.post(`${URI}/api/auth/student/register`, {
+        const res = await axios.post(`${URI}/api/auth/student/register`, {
           name,
           email,
           password,
         });
+        if (res) {
+          console.log(res);
+        }
+        if (res && res.data.success) {
+          setFlag(true);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -61,7 +69,7 @@ function App() {
 
     const postData = async () => {
       try {
-        await axios.post(`${URI}/api/auth/teacher/register`, {
+        const res = await axios.post(`${URI}/api/auth/teacher/register`, {
           name,
           email,
           password,
@@ -69,6 +77,12 @@ function App() {
           proficiency,
           experience,
         });
+        if (res) {
+          console.log(res);
+        }
+        if (res && res.data.success) {
+          setFlag(true);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -79,6 +93,13 @@ function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <NavBar />
+      {flag && (
+        <Stack sx={{ width: "100%" }} spacing={2}>
+          <Alert severity="success">
+            Registeration Successfull.Check your email.
+          </Alert>
+        </Stack>
+      )}
       <MDBContainer className="p-3 my-5 d-flex flex-column w-50">
         <Paper>
           <Box
