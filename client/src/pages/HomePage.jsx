@@ -12,7 +12,7 @@ export default function HomePage() {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${URI}/api/course/getAll`);
-        console.log(response)
+        // console.log(response.data.data[0]._id)
         setCourseData(response.data.data);
       } catch (error) {
         console.error(error);

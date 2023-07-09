@@ -42,6 +42,9 @@ function App() {
 
     setJustifyActive(value);
   };
+
+  const navigate = useNavigate();
+
   const HandleStudentSubmit = (e) => {
     e.preventDefault();
     console.log(name, email, password);

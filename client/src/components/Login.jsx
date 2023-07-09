@@ -60,7 +60,7 @@ export default function Login() {
             console.log(resp);
             localStorage.setItem("auth", JSON.stringify(resp.data));
             localStorage.setItem("role", "teacher");
-            navigate("/home");
+            navigate("/teacher_home");
           }
         } else {
           const resp = await axios.post(`${URI}/api/auth/student/login`, {

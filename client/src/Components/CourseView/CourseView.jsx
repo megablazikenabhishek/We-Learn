@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 
 export default function CourseView(props){
     const {id: courseId} = useParams();
-    console.log(courseId);
+    // console.log(courseId);
     return (
         <>
             <NavBar/>
