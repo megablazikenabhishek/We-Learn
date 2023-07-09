@@ -12,6 +12,7 @@ import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import CourseView from "./components/CourseView/CourseView";
 import Questions from "./Components/Questions/Questions";
 import AddCourse from "./Components/AddCourse/AddCourse";
+import TeacherHomePage from "./pages/TeacherHomePage";
 function App() {
   const [count, setCount] = useState(0);
 
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/home" element={<HomePage />} />
+          <Route path="/teacher_home" element={<TeacherHomePage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<Landing />} />
           {/* <Route path="/profile" element={<Profile />} /> */}

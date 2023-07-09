@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import './AddCourse.css'
 import axios from 'axios'
-import NavBar from '../NavBar'
 import { useNavigate } from 'react-router-dom'
+import NavBar from '../NavBar'
 
 const AddCourse = () => {
 
@@ -61,7 +61,7 @@ const AddCourse = () => {
 
   return (
     <>
-        <NavBar></NavBar>
+      <NavBar/>
         <div className="signup_container">
         <div className="signup_form_container">
           <div className="right">
