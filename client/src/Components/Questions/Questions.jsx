@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import "./Questions.css"
 import NavBar from '../NavBar'
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import URI from '../../URI';
+import getAuthToken from '../../utils/getAuthToken';
+
 
 const Questions = () => {
 
@@ -37,16 +39,21 @@ const Questions = () => {
         setoptions4('');
 
     }
-
+const navigation = useNavigate();
     const handleSubmit=(e)=>{
         e.preventDefault();
 
         // setfinal((prev)=>{
         //     return [...prev,{question,answers,options:[options1,options2,options3,options4]}]
         // })
-
+        let config = {
+          headers: {
+            authorization: getAuthToken().token,
+          },
+        };
         const postData=async()=>{
-            await axios.put(`${URI}/api/course/create/addQuestions/${courseId}`,{questions:final})
+            const data = await axios.put(`${URI}/api/course/create/addQuestions/${courseId}`,{questions:final}, config)
+            navigation("/home")
         }
 
         
