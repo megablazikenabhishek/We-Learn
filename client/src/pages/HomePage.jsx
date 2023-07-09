@@ -3,15 +3,23 @@ import NavBar from "../components/Navbar";
 import { Box, Grid } from "@mui/material";
 import CourseCard from "../components/CourseCard";
 import axios from "axios";
-import URI from "../URI"
+import URI from "../URI";
+import getAuthToken from "../utils/getAuthToken"
 
 export default function HomePage() {
   const [courseData, setCourseData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
+      // console.log(getAuthToken())
       try {
-        const response = await axios.get(`${URI}/api/course/getAll`);
+        let config = {
+          headers: {
+            authorization: getAuthToken().token,
+          },
+        };
+        // console.log(config);
+        const response = await axios.get(`${URI}/api/course/getAll`, config);
         // console.log(response.data.data[0]._id)
         setCourseData(response.data.data);
       } catch (error) {
@@ -38,7 +46,7 @@ export default function HomePage() {
               justifyContent: "center",
             }}
           >
-            <CourseCard course={course} />
+            <CourseCard course={course}/>
           </Grid>
         ))}
       </Grid>
