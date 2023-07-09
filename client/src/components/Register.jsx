@@ -4,6 +4,7 @@ import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import MultipleSelectChip from "./Multiselect";
 
+import {useNavigate} from "react-router-dom";
 import React, { useState } from "react";
 import {
   MDBContainer,
@@ -40,6 +41,9 @@ function App() {
 
     setJustifyActive(value);
   };
+
+  const navigate = useNavigate();
+
   const HandleStudentSubmit = (e) => {
     e.preventDefault();
     console.log(name, email, password);
@@ -50,6 +54,7 @@ function App() {
           email,
           password,
         });
+        navigate("/login")
       } catch (error) {
         console.log(error);
       }
@@ -69,6 +74,7 @@ function App() {
           proficiency,
           experience,
         });
+        navigate("/login")
       } catch (error) {
         console.log(error);
       }

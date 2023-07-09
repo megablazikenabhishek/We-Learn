@@ -28,7 +28,7 @@ export default function RenderVideo(props) {
     fetchData();
   }, []);
 
-  console.log(courseData);
+  // console.log(courseData);
 
   return (
     <div>
