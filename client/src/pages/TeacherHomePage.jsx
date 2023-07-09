@@ -55,9 +55,9 @@ const TeacherHomePage = () => {
           ))}
         </Grid>
 
-        <button className="green_btn" onClick={()=>navigate("/add_course")}>
+        {/* <button className="green_btn" onClick={()=>navigate("/add_course")}>
         Add Course
-        </button>
+        </button> */}
 
       </>
     );
