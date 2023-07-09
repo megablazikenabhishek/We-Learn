@@ -8,6 +8,7 @@ import Landing from "./components/Landing";
 import Register from "./components/Register";
 import HomePage from "./pages/HomePage";
 import AddCourse from "./components/AddCourse/AddCourse";
+import Dashboard from "./components/Dashboard/Dashboard";
 // import { Link } from "@mui/material";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/home" element={<HomePage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<Landing />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           {/* <Route path="/profile" element={<Profile />} /> */}
           <Route path="/add_course" element={<AddCourse />} />
         </Routes>
