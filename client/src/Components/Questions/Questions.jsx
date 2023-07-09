@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import "./Questions.css"
 import NavBar from '../NavBar'
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from 'axios';
 import URI from '../../URI';
 
@@ -15,6 +15,8 @@ const Questions = () => {
     const [options4, setoptions4] = useState('');
 
     const[final,setfinal]=useState([]);
+
+    const navigate=useNavigate();
 
     // console.log(final)
     const {id: courseId} = useParams();
@@ -47,7 +49,11 @@ const Questions = () => {
             await axios.put(`${URI}/api/course/create/addQuestions/${courseId}`,{questions:final})
         }
 
+        
+
         postData();
+
+        navigate("/teacher_home");
     }
 
 
