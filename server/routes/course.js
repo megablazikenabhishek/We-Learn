@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const {checkForAuth, checkforTeacher} = require("../middleware/authMiddle")
+const { checkForAuth, checkforTeacher } = require("../middleware/authMiddle");
 const uploader = require("express-fileupload");
 
 router.post(
@@ -15,7 +15,15 @@ router.put(
   require("../controllers/courseController").addQuestions
 );
 
-router.get("/getAll", checkForAuth, checkforTeacher, require("../controllers/courseController").getAllCourse);
+router.get(
+  "/getAll",
+  checkForAuth,
+  require("../controllers/courseController").getAllCourse
+);
 
-router.get("/get/:id", checkForAuth, checkforTeacher, require("../controllers/courseController").getCourse)
+router.get(
+  "/get/:id",
+  checkForAuth,
+  require("../controllers/courseController").getCourse
+);
 module.exports = router;

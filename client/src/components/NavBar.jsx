@@ -17,9 +17,9 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import "../assets/css/NavBar.css";
-import getAuthToken from "../utils/getAuthToken"
+import getAuthToken from "../utils/getAuthToken";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -67,7 +67,7 @@ const darkTheme = createTheme({
   },
 });
 
-console.log(getAuthToken().role)
+// console.log(getAuthToken().role)
 
 export default function NavBar() {
   const navigation = useNavigate();
@@ -113,19 +113,32 @@ export default function NavBar() {
     >
       {getAuthToken() ? (
         <>
-          <MenuItem onClick={()=>{
-            navigation("/home");
-          }}>home</MenuItem>
-          <MenuItem onClick={()=>{
-            navigation("/dashboard")
-          }}>Dashboard</MenuItem>
+          <MenuItem
+            onClick={() => {
+              navigation("/home");
+            }}
+          >
+            home
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              navigation("/dashboard");
+            }}
+          >
+            Dashboard
+          </MenuItem>
 
-          {
-            getAuthToken().role =="teacher" ?
-            <MenuItem onClick={()=>{
-              navigation("/add_course")
-            }}>Add Course</MenuItem> :""
-          }
+          {getAuthToken() && getAuthToken().role == "teacher" ? (
+            <MenuItem
+              onClick={() => {
+                navigation("/add_course");
+              }}
+            >
+              Add Course
+            </MenuItem>
+          ) : (
+            ""
+          )}
 
           <MenuItem
             onClick={() => {
@@ -133,7 +146,7 @@ export default function NavBar() {
               localStorage.removeItem("role");
               navigation("/login");
             }}
-            >
+          >
             Log out
           </MenuItem>
           <MenuItem onClick={handleMenuClose}>Close</MenuItem>
