@@ -18,6 +18,8 @@ const Questions = () => {
 
     const[final,setfinal]=useState([]);
 
+    const navigate=useNavigate();
+
     // console.log(final)
     const {id: courseId} = useParams();
 
@@ -54,7 +56,11 @@ const navigation = useNavigate();
             navigation("/home")
         }
 
+        
+
         postData();
+
+        navigate("/teacher_home");
     }
 
 

@@ -67,6 +67,8 @@ const darkTheme = createTheme({
   },
 });
 
+console.log(getAuthToken().role)
+
 export default function NavBar() {
   const navigation = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -117,13 +119,21 @@ export default function NavBar() {
           <MenuItem onClick={()=>{
             navigation("/dashboard")
           }}>Dashboard</MenuItem>
+
+          {
+            getAuthToken().role =="teacher" ?
+            <MenuItem onClick={()=>{
+              navigation("/add_course")
+            }}>Add Course</MenuItem> :""
+          }
+
           <MenuItem
             onClick={() => {
               localStorage.removeItem("auth");
               localStorage.removeItem("role");
               navigation("/login");
             }}
-          >
+            >
             Log out
           </MenuItem>
           <MenuItem onClick={handleMenuClose}>Close</MenuItem>
