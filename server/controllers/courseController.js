@@ -17,8 +17,8 @@ exports.Create_Course = async(req, res, next)=>{
     console.log(videos)
     course_data.thumbnail = await uploadSingleFile(req.files.thumbnail);
     course_data.Video = await uploadMultipleFile(videos);
-    // course_data.Instructor = req.user._id;
-    course_data.Instructor = "64a9b8996e676a0561795d77";
+    course_data.Instructor = req.user._id;
+    // course_data.Instructor = "64a9b8996e676a0561795d77";
 
     // console.log(course_data);
 

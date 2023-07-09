@@ -3,6 +3,9 @@ import './AddCourse.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import NavBar from '../NavBar'
+import URI from '../../URI'
+import getAuthToken from "../../utils/getAuthToken";
+
 
 const AddCourse = () => {
   const [file, setFile] = useState(null);
@@ -42,13 +45,12 @@ const AddCourse = () => {
     const config = {
       headers: {
         "content-type": "multipart/form-data",
+        authorization: getAuthToken().token,
       },
     };
 
-    const url = "http://localhost:8000/api/course/create";
-
     axios
-      .post(url, formData, config)
+      .post(`${URI}/api/course/create`, formData, config)
       .then((response) => {
         alert("Course Uploaded Successfully");
         if (response.status == 201) {
