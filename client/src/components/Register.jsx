@@ -39,11 +39,8 @@ function App() {
     if (value === justifyActive) {
       return;
     }
-
     setJustifyActive(value);
   };
-
-  const navigate = useNavigate();
 
   const HandleStudentSubmit = (e) => {
     e.preventDefault();
