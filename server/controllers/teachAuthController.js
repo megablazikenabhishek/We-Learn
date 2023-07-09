@@ -7,6 +7,8 @@ const jwt = require("jsonwebtoken");
 // for register
 exports.registerController = async (req, res) => {
   try {
+    let student = false;
+    let teacher = true;
     const { name, email, qualification, proficiency, experience, password } =
       req.body;
     switch (true) {
@@ -33,7 +35,7 @@ exports.registerController = async (req, res) => {
     }
     const newUser = new teacherModel({ ...req.body });
     const temp = await newUser.save();
-    sendMailforVerification(temp.name, temp.email, temp._id);
+    sendMailforVerification(temp.name, temp.email, temp._id, teacher, student);
     res.status(201).json({
       success: true,
       msg: "Registration Successfull.Please check your email for verification",

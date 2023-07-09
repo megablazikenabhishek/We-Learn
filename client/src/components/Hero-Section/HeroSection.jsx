@@ -3,7 +3,9 @@ import { Container, Row, Col } from "reactstrap";
 import heroImg from "../../assets/images/hero-img1.png";
 import "./hero-section.css";
 import { Button } from "@mui/material";
+import {useNavigate} from "react-router-dom"
 const HeroSection = () => {
+  const navigate = useNavigate();
   return (
     <section>
       <Container>
@@ -24,10 +26,10 @@ const HeroSection = () => {
               <button className="btn">Search</button>
             </div> */}
             <Button
-              href="/login"
               variant="contained"
               color="success"
               style={{ width: "200px" }}
+              onClick={()=>navigate("/login")}
             >
               Get Started
             </Button>

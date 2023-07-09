@@ -1,23 +1,81 @@
-import React from "react";
-import "./AddCourse.css";
-import NavBar from "../Navbar";
-import Button from "@mui/material/Button";
+import React, { useState } from 'react'
+import './AddCourse.css'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import NavBar from '../NavBar'
+
 const AddCourse = () => {
+  const [file, setFile] = useState(null);
+  const [name, setname] = useState(null);
+  const [details, setdetails] = useState(null);
+  const [videos, setVideos] = useState([]);
+  // const [data, setData] = useState({ name: "", details: "" , Instructor :"",});
+
+  // const handleChange = ({ currentTarget: input }) => {
+  // 	setData({ ...data, [input.name]: input.value });
+  // };
+
+  const navigate = useNavigate();
+
+  const FileChange = (e) => {
+    console.log(e.target.value);
+    setFile(e.target.files[0]);
+  };
+
+  const VideoChange = (e) => {
+    setVideos(e.target.files);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("thumbnail", file);
+    for (let i = 0; i < videos.length; i++) {
+      formData.append(`Video${i + 1}`, videos[i]);
+    }
+
+    formData.append("no_of_videos", videos.length);
+    formData.append("name", name);
+    formData.append("details", details);
+
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    };
+
+    const url = "http://localhost:8000/api/course/create";
+
+    axios
+      .post(url, formData, config)
+      .then((response) => {
+        alert("Course Uploaded Successfully");
+        if (response.status == 201) {
+          navigate(`/add_question/${response.data.data._id}`);
+        }
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+  };
+
   return (
     <>
-      <NavBar />
-      <div className="signup_container">
+      <NavBar/>
+        <div className="signup_container">
         <div className="signup_form_container">
           <div className="right">
             <p>Add Course</p>
-            <form className="form_container">
-              {/* onSubmit={handleSubmit} */}
+            <form className="form_container" onSubmit={handleSubmit}>
               <input
                 type="text"
                 placeholder="Course Name"
                 name="name"
-                // onChange={handleChange}
-                // value={data.state_name}
+                onChange={(e) => {
+                  setname(e.target.value);
+                }}
+                // value={data.name}
                 required
                 className="input"
               />
@@ -25,17 +83,10 @@ const AddCourse = () => {
                 type="text"
                 placeholder="Course Details"
                 name="details"
-                // onChange={handleChange}
-                // value={data.population_male}
-                required
-                className="input"
-              />
-              <input
-                type="text"
-                placeholder="Instructor Name"
-                name="Instructor"
-                // onChange={handleChange}
-                // value={data.population_female}
+                onChange={(e) => {
+                  setdetails(e.target.value);
+                }}
+                // value={data.details}
                 required
                 className="input"
               />
@@ -43,31 +94,24 @@ const AddCourse = () => {
                 type="file"
                 placeholder="Upload Thumbnail"
                 name="thumbnail"
-                // onChange={handleChange}
-                // value={data.literates_male}
+                onChange={FileChange}
                 required
                 className="input"
               />
-              {/* <input
-                type="number"
-                placeholder="Female Literates"
-                name="literates_female"
-                // onChange={handleChange}
-                // value={data.literates_female}
+              <input
+                type="file"
+                multiple
+                accept="video/mp4"
+                placeholder="Video"
+                name="Video"
+                onChange={VideoChange}
                 required
                 className="input"
-              /> */}
+              />
               {/* {error && <div className="error_msg">{error}</div>} */}
-              {/* <button type="submit" className="green_btn">
+              <button type="submit" className="green_btn">
                 Upload
-              </button> */}
-              <Button
-                variant="contained"
-                size="large"
-                sx={{ marginTop: "20px" }}
-              >
-                Upload
-              </Button>
+              </button>
             </form>
           </div>
         </div>

@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-exports.sendMailforVerification = async (name, email, id) => {
+exports.sendMailforVerification = async (name, email, id, teacher, student) => {
   try {
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -13,7 +13,9 @@ exports.sendMailforVerification = async (name, email, id) => {
       from: process.env.SENDER_MAIL,
       to: email,
       subject: "Email for verification",
-      html: `<p>${name} Click here to <a href="${process.env.BASE_FRONTEND_URL}/verify/${id}">Verify</a></p>`,
+      html: `<p>${name} Click here to <a href="${
+        process.env.BASE_FRONTEND_URL
+      }/verify/${id}?role=${teacher ? "teacher" : "student"}">Verify</a></p>`,
     });
   } catch (error) {
     console.log(error);

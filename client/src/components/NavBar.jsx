@@ -17,7 +17,9 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import {useNavigate} from "react-router-dom"
 import "../assets/css/NavBar.css";
+import getAuthToken from "../utils/getAuthToken"
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -66,6 +68,7 @@ const darkTheme = createTheme({
 });
 
 export default function NavBar() {
+  const navigation = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -106,8 +109,44 @@ export default function NavBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      {getAuthToken() ? (
+        <>
+          <MenuItem onClick={()=>{
+            navigation("/home");
+          }}>home</MenuItem>
+          <MenuItem onClick={()=>{
+            navigation("/dashboard")
+          }}>Dashboard</MenuItem>
+          <MenuItem
+            onClick={() => {
+              localStorage.removeItem("auth");
+              localStorage.removeItem("role");
+              navigation("/login");
+            }}
+          >
+            Log out
+          </MenuItem>
+          <MenuItem onClick={handleMenuClose}>Close</MenuItem>
+        </>
+      ) : (
+        <>
+          <MenuItem
+            onClick={() => {
+              navigation("/login");
+            }}
+          >
+            Login
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              navigation("/register");
+            }}
+          >
+            sign up
+          </MenuItem>
+          <MenuItem onClick={handleMenuClose}>Close</MenuItem>
+        </>
+      )}
     </Menu>
   );
 
