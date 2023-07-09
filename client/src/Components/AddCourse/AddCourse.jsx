@@ -1,77 +1,80 @@
-import React, { useState } from 'react'
-import './AddCourse.css'
-import axios from 'axios'
-import NavBar from '../NavBar'
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from "react";
+import "./AddCourse.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import NavBar from "../NavBar";
 
 const AddCourse = () => {
-
-  const [file,setFile]=useState(null)
-  const [name,setname]=useState(null)
-  const [details,setdetails]=useState(null)
-  const [videos,setVideos]=useState([])
+  const [file, setFile] = useState(null);
+  const [name, setname] = useState(null);
+  const [details, setdetails] = useState(null);
+  const [videos, setVideos] = useState([]);
   // const [data, setData] = useState({ name: "", details: "" , Instructor :"",});
 
   // const handleChange = ({ currentTarget: input }) => {
-	// 	setData({ ...data, [input.name]: input.value });
-	// };
+  // 	setData({ ...data, [input.name]: input.value });
+  // };
 
   const navigate = useNavigate();
 
-  const FileChange=(e)=>{
-    console.log(e.target.value)
-    setFile(e.target.files[0])
-  } 
+  const FileChange = (e) => {
+    console.log(e.target.value);
+    setFile(e.target.files[0]);
+  };
 
-  const VideoChange=(e)=>{
-    setVideos(e.target.files)
-  } 
+  const VideoChange = (e) => {
+    setVideos(e.target.files);
+  };
 
-  const handleSubmit=(e)=>{
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    const formData =new FormData();
-    formData.append('thumbnail',file)
-    for(let i=0;i<videos.length;i++){
-      formData.append(`Video${i+1}`,videos[i]);
+    const formData = new FormData();
+    formData.append("thumbnail", file);
+    for (let i = 0; i < videos.length; i++) {
+      formData.append(`Video${i + 1}`, videos[i]);
     }
 
-    formData.append('no_of_videos',videos.length);
-    formData.append('name',name);
-    formData.append('details',details);
+    formData.append("no_of_videos", videos.length);
+    formData.append("name", name);
+    formData.append("details", details);
 
-    const config={
-      headers:{
-        'content-type':'multipart/form-data'
-      }
-    }
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    };
 
-    const url="http://localhost:8000/api/course/create";
+    const url = "http://localhost:8000/api/course/create";
 
-    axios.post(url,formData,config).then((response)=>{
-      alert('Course Uploaded Successfully');
-      if(response.status==201){
-        navigate(`/add_question/${response.data.data._id}`)
-      }
-    }).catch((err)=>{
-      console.log('err',err)
-    })
-
-  }
+    axios
+      .post(url, formData, config)
+      .then((response) => {
+        alert("Course Uploaded Successfully");
+        if (response.status == 201) {
+          navigate(`/add_question/${response.data.data._id}`);
+        }
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+  };
 
   return (
     <>
-        <NavBar></NavBar>
-        <div className="signup_container">
+      <NavBar />
+      <div className="signup_container">
         <div className="signup_form_container">
           <div className="right">
-          <p>Add Course</p>
+            <p>Add Course</p>
             <form className="form_container" onSubmit={handleSubmit}>
               <input
                 type="text"
                 placeholder="Course Name"
                 name="name"
-                onChange={(e)=>{setname(e.target.value)}}
+                onChange={(e) => {
+                  setname(e.target.value);
+                }}
                 // value={data.name}
                 required
                 className="input"
@@ -80,7 +83,9 @@ const AddCourse = () => {
                 type="text"
                 placeholder="Course Details"
                 name="details"
-                onChange={(e)=>{setdetails(e.target.value)}}
+                onChange={(e) => {
+                  setdetails(e.target.value);
+                }}
                 // value={data.details}
                 required
                 className="input"
@@ -96,7 +101,7 @@ const AddCourse = () => {
               <input
                 type="file"
                 multiple
-                accept='video/mp4'
+                accept="video/mp4"
                 placeholder="Video"
                 name="Video"
                 onChange={VideoChange}
@@ -112,7 +117,7 @@ const AddCourse = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default AddCourse
+export default AddCourse;
