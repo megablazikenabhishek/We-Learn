@@ -111,8 +111,12 @@ export default function NavBar() {
     >
       {getAuthToken() ? (
         <>
-          <MenuItem>Profile</MenuItem>
-          <MenuItem>My account</MenuItem>
+          <MenuItem onClick={()=>{
+            navigation("/home");
+          }}>home</MenuItem>
+          <MenuItem onClick={()=>{
+            navigation("/dashboard")
+          }}>Dashboard</MenuItem>
           <MenuItem
             onClick={() => {
               localStorage.removeItem("auth");
