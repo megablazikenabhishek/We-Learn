@@ -6,6 +6,8 @@ const bcrypt = require("bcrypt");
 // for register
 exports.registerControllerForStudent = async (req, res) => {
   try {
+    let student = true;
+    let teacher = false;
     const { name, email, password } = req.body;
     switch (true) {
       case !name:
@@ -25,7 +27,7 @@ exports.registerControllerForStudent = async (req, res) => {
     }
     const newUser = new studentModel({ ...req.body });
     const temp = await newUser.save();
-    sendMailforVerification(temp.name, temp.email, temp._id);
+    sendMailforVerification(temp.name, temp.email, temp._id, teacher, student);
     res.status(201).json({
       success: true,
       msg: "Registration Successfull.Please check your email for verification",
